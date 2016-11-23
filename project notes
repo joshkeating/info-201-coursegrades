@@ -1,0 +1,17 @@
+Ideas for visualizations:
+1. Chunked scatterplot by year and quarter of grades for each class per quarter (with a histogram binned by no. of students)
+2. Search by professor to find their grades in each class they've taught for each quarter; different classes have different colors
+3. Seach within each class (each indiv. classrepresented by a bell curve) to show which quarter/professor gives the highest avg gpa
+4. Choose a course, select a prof & quarter, get back a distribution of grades achieved
+5. Predict whether or not a professor will teach a particular class in a particular quarter
+6. 
+
+Guidelines:
+2-3 tabs, depending on complexity & number of widgets (aim for 2)
+  Widget for class, year: shows [scattered histogram] of yearly GPA trend for a particular class
+    Rollover of each point has professor name, more info about particular class
+    color of each point assigned to size of class
+  Widget for class, quarter: shows [line graph]/[overlaid histogram] for each professor (GPA v. prevalence)
+    color is randomly assigned to each distribution
+    key is auto-generated
+    
