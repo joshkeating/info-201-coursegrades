@@ -4,8 +4,8 @@ library(plotly)
 library(dplyr)
 library(rCharts)
 
-base_grades <- read.csv("/home/josh//School_16-17/Info-201/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
-gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/UWgpa.csv")
+base_grades <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
+gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
 
 
 # Define server logic required to draw a histogram
