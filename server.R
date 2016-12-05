@@ -24,7 +24,7 @@ shinyServer(function(input, output, session) {
       need(input$checkGroup != "", 'Please choose at least one quarter.')
     )
     
-    trimmed.course <- filter(gpa, Class == toupper(input$text), Quarter == input$checkGroup)
+    trimmed.course <- filter(gpa, Class == toupper(input$text), Quarter %in% input$checkGroup)
     
     # tr2 <- filter(trimmed.course, Quarter == input$checkGroup)
     

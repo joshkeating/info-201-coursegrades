@@ -28,8 +28,6 @@ shinyUI(fluidPage(
       
       verbatimTextOutput("selct")
       
-  
-      
       
     ),
     
