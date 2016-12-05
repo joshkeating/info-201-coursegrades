@@ -20,9 +20,9 @@ shinyServer(function(input, output, session) {
   
   datasetInput <- reactive({
     
-    trimmed.course <- filter(gpa, Class == toupper(input$text))
+    trimmed.course <- filter(gpa, Class == toupper(input$text), Quarter == input$checkGroup)
     
-    tr2 <- filter(trimmed.course, Quarter == input$checkGroup)
+    # tr2 <- filter(trimmed.course, Quarter == input$checkGroup)
     
     return(trimmed.course)
 
