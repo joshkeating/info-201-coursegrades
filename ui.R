@@ -4,6 +4,8 @@ library(plotly)
 library(dplyr)
 library(rCharts)
 
+base_grades <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
+gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
@@ -16,7 +18,7 @@ shinyUI(fluidPage(
       verbatimTextOutput('value'),
       
       checkboxGroupInput("checkGroup", label = h3("Quarter Selection"), 
-                         choices = list("Autumn" = "Autumn", "Winter" = "Winter", "Spring" = "Spring", "Summer" = "Summer"),
+                         choices = c(unique(as.character(gpa$Quarter))),
                          selected = "Winter"),
       
       # selected = c("Autumn", "Winter", "Spring", "Summer")
