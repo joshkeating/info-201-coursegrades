@@ -19,20 +19,17 @@ shinyServer(function(input, output, session) {
   
   
   datasetInput <- reactive({
-    
+   
+    validate(
+      need(input$text != "", 'Please enter a class')
+    )
     validate(
       need(input$checkGroup != "", 'Please choose at least one quarter.')
     )
-    
     trimmed.course <- filter(gpa, Class == toupper(input$text), Quarter %in% input$checkGroup)
-    
-    # tr2 <- filter(trimmed.course, Quarter == input$checkGroup)
-    
     return(trimmed.course)
 
   })
-  
-  
   
   
   output$table <- renderDataTable({datasetInput()})
