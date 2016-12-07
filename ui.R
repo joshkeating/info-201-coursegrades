@@ -5,7 +5,7 @@ library(dplyr)
 library(rCharts)
 
 # Remember to change this is you're not Josh
-gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
+gpa <- read.csv("./resources/UWgpa.csv")
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(

@@ -3,10 +3,9 @@ library(shiny)
 library(plotly)
 library(dplyr)
 library(reshape2)
-library(RColorBrewer)
 
 # Remember to change this is you're not Josh
-gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
+gpa <- read.csv("./resources/UWgpa.csv")
 
 gpa <- rename(gpa, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C..1, "D+"=D., "D"=D, "D-"=D..1)
 
