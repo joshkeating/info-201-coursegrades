@@ -17,7 +17,7 @@ shinyUI(fluidPage(
       textInput("text", label = h3("Select a Course"), value = "CSE 142"),
       verbatimTextOutput('value'),
       
-      checkboxGroupInput("checkGroup", label = h3("Quarter Selection"), 
+      checkboxGroupInput("checkGroup", label = h3("Select Quarter(s)"), 
                          choices = c(unique(as.character(gpa$Quarter))),
                          selected = "Winter"),
       
@@ -32,43 +32,12 @@ shinyUI(fluidPage(
     ),
     
     mainPanel(
+      plotlyOutput("plot")
       
-      dataTableOutput('table')
+      # dataTableOutput('table')
       
     )
-    
-    
-    
-    # column(4,
-    #        
-    #        # Copy the line below to make a slider range 
-    #        sliderInput("slider1", label = h3("Year(s) Range"), min = 2010, 
-    #                    max = 2016, year_range = c(2014, 2015))
-    # ),
-    
-    
-    
-    
-    # column(3, wellPanel(
-    #   selectInput("input_type", "Input type",
-    #               c("slider", "text", "numeric", "checkbox",
-    #                 "checkboxGroup", "radioButtons", "selectInput",
-    #                 "selectInput (multi)", "date", "daterange"
-    #               )
-    #   )
-    # )),
-    # 
-    # column(3, wellPanel(
-    #   # This outputs the dynamic UI component
-    #   uiOutput("ui")
-    # )),
-    # 
-    # column(3,
-    #        tags$p("Input type:"),
-    #        verbatimTextOutput("input_type_text"),
-    #        tags$p("Dynamic input value:"),
-    #        verbatimTextOutput("dynamic_value")
-    # )
+   
   )
   
   

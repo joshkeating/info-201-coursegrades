@@ -2,11 +2,15 @@
 library(shiny)
 library(plotly)
 library(dplyr)
+library(reshape2)
 library(rCharts)
 
 base_grades <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
 gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
 
+
+# gpa[is.na(gpa)] <- 0
+gpa <- rename(gpa, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C..1, "D+"=D., "D"=D, "D-"=D..1)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -21,77 +25,42 @@ shinyServer(function(input, output, session) {
   datasetInput <- reactive({
    
     validate(
-      need(input$text != "", 'Please enter a class')
+      need(input$text != "", 'Please enter a class.')
     )
     validate(
       need(input$checkGroup != "", 'Please choose at least one quarter.')
     )
     trimmed.course <- filter(gpa, Class == toupper(input$text), Quarter %in% input$checkGroup)
-    return(trimmed.course)
+    
+    
+    trimmed.course <- select(trimmed.course, 11:22, Student_Count)
+    trimmed.course[is.na(trimmed.course)] <- 0
+    trimmed.course$row <- rownames(trimmed.course)
+    # Creates data frame with row column and total students column from trimmed.course
+    st <- data.frame('row' = numeric(nrow(trimmed.course)), 'total' = numeric(nrow(trimmed.course)))
+    st$row <- trimmed.course[,'row']
+    st$total <- trimmed.course[,'Student_Count']
+    trimmed.course$Student_Count <- NULL
+    trimmed.course_melt = melt(trimmed.course, id.vars = 'row')
+    # this graphs the data, but in ggplot
+    p <- ggplot(data = trimmed.course_melt, aes(x = variable, y = value, group = row)) + geom_line()
+    
+    return(p)
 
   })
   
+  # this is for the table --------------------------------------------
   
-  output$table <- renderDataTable({datasetInput()})
-  
-  
-  
-  
-
-  # Slider widget for year selection
-  # output$range <- renderPrint({ input$slider1 })
-  
-  # output$ui <- renderUI({
-  #   if (is.null(input$input_type))
-  #     return()
-  #   
-  #   switch(input$input_type,
-  #          "slider" = sliderInput("dynamic", "Dynamic",
-  #                                 min = 1, max = 20, value = 10),
-  #          "text" = textInput("dynamic", "Dynamic",
-  #                             value = "starting value"),
-  #          "numeric" =  numericInput("dynamic", "Dynamic",
-  #                                    value = 12),
-  #          "checkbox" = checkboxInput("dynamic", "Dynamic",
-  #                                     value = TRUE),
-  #          "checkboxGroup" = checkboxGroupInput("dynamic", "Dynamic",
-  #                                               choices = c("Option 1" = "option1",
-  #                                                           "Option 2" = "option2"),
-  #                                               selected = "option2"
-  #          ),
-  #          "radioButtons" = radioButtons("dynamic", "Dynamic",
-  #                                        choices = c("Option 1" = "option1",
-  #                                                    "Option 2" = "option2"),
-  #                                        selected = "option2"
-  #          ),
-  #          "selectInput" = selectInput("dynamic", "Dynamic",
-  #                                      choices = c("Option 1" = "option1",
-  #                                                  "Option 2" = "option2"),
-  #                                      selected = "option2"
-  #          ),
-  #          "selectInput (multi)" = selectInput("dynamic", "Dynamic",
-  #                                              choices = c("Option 1" = "option1",
-  #                                                          "Option 2" = "option2"),
-  #                                              selected = c("option1", "option2"),
-  #                                              multiple = TRUE
-  #          ),
-  #          "date" = dateInput("dynamic", "Dynamic"),
-  #          "daterange" = dateRangeInput("dynamic", "Dynamic")
-  #   )
-  #   
-  #   
-  #   
-  #   
+  # output$table <- renderDataTable({
+  #   datasetInput()
   # })
-  # 
-  # 
-  # output$input_type_text <- renderText({
-  #   input$input_type
-  # })
-  # 
-  # output$dynamic_value <- renderPrint({
-  #   str(input$dynamic)
-  # })
-  # 
-  # 
+  
+  # this is the plot stuff --------------------------------------------
+  
+  output$plot <- renderPlotly({
+    ggplotly(datasetInput())
+  })
+  
+  
+  
 })
