@@ -15,27 +15,26 @@ shinyUI(fluidPage(
     sidebarPanel(
     
       textInput("text", label = h3("Select a Course"), value = "CSE 142"),
-      verbatimTextOutput('value'),
       
-      checkboxGroupInput("checkGroup", label = h3("Select Quarter(s)"), 
+      helpText("Note: Syntax of class input should be abbreviation of ",
+               "the class followed by the course number i.e INFO 200."),
+      
+      # Uncomment this line for debugging
+      # verbatimTextOutput('value'),
+      
+      checkboxGroupInput("checkGroup", label = h3("Select Quarter(s)"),
                          choices = c(unique(as.character(gpa$Quarter))),
                          selected = c("Autumn", "Winter")),
       
-      # selected = c("Autumn", "Winter", "Spring", "Summer")
-      # list("Autumn" = Autumn, "Winter" = Winter, "Spring" = Spring, "Summer" = Summer)
-      # list("Choice 1" = 1, "Choice 2" = 2, "Choice 3" = 3)
+      helpText("Note: Select quarter(s) to view grade distribution.")
       
-      
-      verbatimTextOutput("selct")
-      
+      # Uncomment this line for debugging
+      # ,verbatimTextOutput("selct")
       
     ),
     
     mainPanel(
       plotlyOutput("plot")
-      
-      # dataTableOutput('table')
-      
     )
    
   )

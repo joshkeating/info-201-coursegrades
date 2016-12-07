@@ -13,7 +13,6 @@ gpa <- rename(gpa, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C.
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
    
-  
   # Text input widget 
   output$value <- renderPrint({ input$text })
   
@@ -41,7 +40,7 @@ shinyServer(function(input, output, session) {
     trimmed.course_head_melt <- melt(trimmed.course_head[11:24], id.vars = c('Teacher', "Quarter_Color"))
     p <- ggplot(data = trimmed.course_head_melt, aes(x = variable, y = value, group = Teacher, colour = Quarter_Color)) + 
       ylab('Number of Students') + xlab('Grade Given') + 
-      geom_line() + theme_minimal()
+      geom_line(alpha = 0.7) + theme_minimal()
     
     return(p)
 
@@ -53,12 +52,10 @@ shinyServer(function(input, output, session) {
   #   datasetInput()
   # })
   
-  # this is the plot stuff --------------------------------------------
+  # this is the plot stuff -------------------------------------------
   
   output$plot <- renderPlotly({
     ggplotly(datasetInput())
   })
-  
-  
   
 })
