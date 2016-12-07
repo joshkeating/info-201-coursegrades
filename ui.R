@@ -19,7 +19,7 @@ shinyUI(fluidPage(
       
       checkboxGroupInput("checkGroup", label = h3("Select Quarter(s)"), 
                          choices = c(unique(as.character(gpa$Quarter))),
-                         selected = "Winter"),
+                         selected = c("Autumn", "Winter")),
       
       # selected = c("Autumn", "Winter", "Spring", "Summer")
       # list("Autumn" = Autumn, "Winter" = Winter, "Spring" = Spring, "Summer" = Summer)
