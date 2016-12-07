@@ -18,7 +18,6 @@ shinyServer(function(input, output, session) {
   
   output$selct <- renderPrint({ input$checkGroup })
   
-  
   datasetInput <- reactive({
    
     validate(
