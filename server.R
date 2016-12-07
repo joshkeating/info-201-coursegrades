@@ -5,7 +5,7 @@ library(dplyr)
 library(reshape2)
 library(rCharts)
 
-base_grades <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
+# Remember to change this is you're not Josh
 gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
 
 
@@ -42,8 +42,12 @@ shinyServer(function(input, output, session) {
     st$total <- trimmed.course[,'Student_Count']
     trimmed.course$Student_Count <- NULL
     trimmed.course_melt = melt(trimmed.course, id.vars = 'row')
-    # this graphs the data, but in ggplot
-    p <- ggplot(data = trimmed.course_melt, aes(x = variable, y = value, group = row)) + geom_line()
+    # this graphs the data in ggplot
+    p <- ggplot(data = trimmed.course_melt, aes(x = variable, y = value, group = row, color = row)) +
+      ylab('# of Students') + xlab('Grade Given') + 
+      # geom_line() + theme_minimal()
+    
+     geom_smooth(method = 'loess', se = FALSE)
     
     return(p)
 

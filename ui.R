@@ -4,7 +4,7 @@ library(plotly)
 library(dplyr)
 library(rCharts)
 
-base_grades <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv")
+# Remember to change this is you're not Josh
 gpa <- read.csv("/home/josh/School_16-17/Info-201/info-201-coursegrades/resources/UWgpa.csv")
 
 # Define UI for application that draws a histogram
