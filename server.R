@@ -44,10 +44,9 @@ shinyServer(function(input, output, session) {
     trimmed.course_melt = melt(trimmed.course, id.vars = 'row')
     # this graphs the data in ggplot
     p <- ggplot(data = trimmed.course_melt, aes(x = variable, y = value, group = row, color = row)) +
-      ylab('# of Students') + xlab('Grade Given') + 
-      # geom_line() + theme_minimal()
-    
-     geom_smooth(method = 'loess', se = FALSE)
+      ylab('Number of Students') + xlab('Grade Given') + 
+      geom_line() + theme_minimal()
+      # + geom_smooth(method = 'loess', se = FALSE)
     
     return(p)
 
