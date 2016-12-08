@@ -10,7 +10,7 @@ gpa <- read.csv("./resources/UWgpa.csv")
 # Renames the GPA columns to something more readable
 gpa <- rename(gpa, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C..1, "D+"=D., "D"=D, "D-"=D..1)
 
-# Define server logic required to draw a histogram
+# Define server logic
 shinyServer(function(input, output, session) {
    
   # Text input widget
