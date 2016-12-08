@@ -3,9 +3,9 @@ title: info-201-coursegrades
 account: joshkeating
 server: shinyapps.io
 appId: 143057
-bundleId: 641404
+bundleId: 641423
 url: https://joshkeating.shinyapps.io/info-201-coursegrades/
-when: 1481240208.27226
+when: 1481240969.11329
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: project notes|README.md|resources/uniqueClass.csv|resources/UW-Seattle_20110-20161-Course-Grade-Data_2016-04-06.csv

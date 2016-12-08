@@ -85,12 +85,9 @@ navbarPage("University of Washington Grades",
                    p("Ned Sander"),
                    br(),
                    
-                   
-                   
-                  p(
+                   p(
                     a("Link to github", href ="https://github.com/joshkeating/info-201-coursegrades")
-                    
-                  )
+                   )
 
 
            )
