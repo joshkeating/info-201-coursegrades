@@ -3,12 +3,15 @@ library(shiny)
 library(plotly)
 library(dplyr)
 library(reshape2)
+
 # Sources the data from the /resources dir
 gpa <- read.csv("./resources/UWgpa.csv")
 data.filtered <- read.csv("./resources/subset.csv", stringsAsFactors = FALSE)
+
 # Renames the GPA columns to something more readable
 gpa <- rename(gpa, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C..1, "D+"=D., "D"=D, "D-"=D..1)
 data.filtered <- rename(data.filtered, "A-" = A., "B+"=B., "B"=B, "B-"=B..1, "C+"=C., "C"=C, "C-"=C..1, "D+"=D., "D"=D, "D-"=D..1)
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
   
@@ -58,23 +61,18 @@ shinyServer(function(input, output, session) {
     
     return(p)
     
-    
-    
   })
   
+  # plot 2 function
   BuildPlot <- function(data.filtered) {
     
+    # x axis parameters for plot 2
     ax <- list(
       title = "Quarter",
       showticklabels = FALSE,
       range = c(0, 40),
       dtick = 10
     )
-    
-    # xvar <- paste0('~', df$X.shift)
-    # yvar <- paste0('~', df$Average_GPA)
-    # plot.color1 <- ((df$X.shift %% 10)*100)
-    # plot.color2 <- paste0('~', plot.color1)
     
     
     plot_ly(
@@ -92,22 +90,15 @@ shinyServer(function(input, output, session) {
                       yref = "y",
                       showarrow = FALSE)}
   
-  
-  
-  # Use this to debug filtering functions
-  
-  # output$table <- renderDataTable({
-  #   datasetInput()
-  # })
-  
   # sends the datasetInput() plot into renderPlotly
-  
   output$plot <- renderPlotly({
     ggplotly(datasetInput())
   })
   
+  # uses ui data to render plot
   output$plot2 <- renderPlotly({
     
+    # displays all classes as default behavior
     if (input$class == "All"){
       
       df.choose <- data.filtered %>%
@@ -116,6 +107,7 @@ shinyServer(function(input, output, session) {
       return(BuildPlot(df.choose))
     }
     
+    # selects class and year from ui
     else{
       df.choose <- data.filtered %>%
         filter(data.filtered$Year == input$year & data.filtered$Class ==  toupper(input$class))
@@ -123,6 +115,5 @@ shinyServer(function(input, output, session) {
       return(BuildPlot(df.choose))}
     
   })
-  
-  
+
 })
