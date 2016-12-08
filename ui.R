@@ -12,8 +12,6 @@ navbarPage("University of Washington Grades",
            tabPanel("Distribution by Quarter",
                     sidebarLayout(
                       sidebarPanel(
-                        # stuff goes here
-                        
                         
                         
                         # defines values for textInput widget 
