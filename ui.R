@@ -56,15 +56,13 @@ navbarPage("University of Washington Grades",
                       # defines values for selectInput widget 
                       selectInput(inputId = 'year', 'Pick Year', choices = list('2010' = '2010', '2011' = '2011', '2012'='2012', '2013'= '2013', '2014'='2014', '2015'='2015'), selected = "2014")
                       
-                      
                     ),
+                    
                     mainPanel(
                         plotlyOutput('plot2')
-                      )
+                    )
                     
            ),
-           
-           
            
           # framing the data desc
           tabPanel("About",
@@ -84,9 +82,16 @@ navbarPage("University of Washington Grades",
                    
                    p("Clalissa Yi"),
                    
-                   p("Ned Sander")
+                   p("Ned Sander"),
+                   br(),
+                   
+                   
+                   
+                  p(
+                    a("Link to github", href ="https://github.com/joshkeating/info-201-coursegrades")
+                    
+                  )
 
-                      
 
            )
 )
