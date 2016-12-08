@@ -42,15 +42,15 @@ shinyServer(function(input, output, session) {
                                     trimmed.course$Average_GPA)
     
     # adds Quarter_Color col for coloring by quarter
-    trimmed.course$Quarter_Color <- trimmed.course$Quarter
+    trimmed.course$Color <- trimmed.course$Quarter
     
     # sets NA values to 0
     trimmed.course[is.na(trimmed.course)] <- 0
     
     # melts the data into something that is plotable by ggplot
     trimmed.course_head <- trimmed.course
-    trimmed.course_head_melt <- melt(trimmed.course_head[11:24], id.vars = c('Teacher', "Quarter_Color"))
-    p <- ggplot(data = trimmed.course_head_melt, aes(x = variable, y = value, group = Teacher, colour = Quarter_Color)) + 
+    trimmed.course_head_melt <- melt(trimmed.course_head[11:24], id.vars = c('Teacher', "Color"))
+    p <- ggplot(data = trimmed.course_head_melt, aes(x = variable, y = value, group = Teacher, colour = Color)) + 
       ylab('Number of Students') + xlab('Grade Given') + 
       geom_line(alpha = 0.7) + theme_minimal()
     
