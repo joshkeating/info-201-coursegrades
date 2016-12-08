@@ -1,5 +1,10 @@
 
-#### SHINY 
+df <- read.csv("subset.csv", stringsAsFactors = FALSE)
+Quarters <- factor(df$Quarter, levels = c("Autumn","Winter","Spring","Summer"))
+as.numeric(Quarters)
+df <- mutate(df, X.shift = (10 * as.numeric(Quarters) - 10) + (Student_Count / 100))
+
+#######
 
 shinyServer(function(input, output) {
 
