@@ -2,27 +2,15 @@
 library(shiny)
 library(plotly)
 library(dplyr)
-
+library(rCharts)
 # Sources the data from the /resources dir
 gpa <- read.csv("./resources/UWgpa.csv")
-
-
+data.filtered <- read.csv("./resources/subset.csv", stringsAsFactors = FALSE)
 navbarPage("University of Washington Grades",
            tabPanel("Distribution by Quarter",
-                    
-                    
-                    h2("Grade Distribution Over Time"),
-                    br(),
-                    p("This interactive vizualization allows you to select a course and filter by quarter to view that",
-                      " particular classes distribution over time.  By hovering over the data, you can view the year,",
-                      "professor, quarter, and average GPA of that class."
-                      ),
-                    br(),
-                    
                     sidebarLayout(
                       sidebarPanel(
                         
-                       
                         
                         # defines values for textInput widget 
                         textInput("text", label = h3("Select a Course"), value = "CSE 142"),
@@ -45,33 +33,45 @@ navbarPage("University of Washington Grades",
                         # Uncomment this line for debugging
                         # ,verbatimTextOutput("selct")
                         
-                       
-                      
+                        
                       ),
                       mainPanel(
                         plotlyOutput("plot")
                       )
-                      
-                      
                     )
+           ),
+           
+           tabPanel("GPA Distrubution by Class", 
+                    
+                    headerPanel("UW GPA"),
+                    sidebarPanel(
+                      textInput(inputId = 'class', 'Pick Course', value = "All"),
+                      helpText("Note: Syntax of class input should be abbreviation of ",
+                               "the class followed by the course number i.e INFO 200."),
+                      selectInput(inputId = 'year', 'Pick Year', choices = list('2010' = '2010', '2011' = '2011', '2012'='2012', '2013'= '2013', '2014'='2014', '2015'='2015'), selected = "2014")
+                      
+                      
+                    ),
+                    mainPanel(
+                      tabsetPanel(type = "tabs",
+                                  tabPanel("Michael Clalissa",plotlyOutput('plot2'))
+                      ))
                     
            ),
-           tabPanel("Other plot"
-                    
-           ), 
+           
+           
+           
+            
            tabPanel("About",
-                    titlePanel("Framing The Data"),
-                    br(),
-                    p("For our project we chose a dataset of all the class grades from the University of Washington from
-                      2010 to 2016.  This data is anonymized and can be manipulated to highlight features that are important to 
-                      current UW students. Using this data and our visualizations, the user can determine which classes have
-                      higher average GPA when stratified by quarter."
-      
-                    )
+                    h2("Framing the Data"),
+                    p("For our final project in INFO 201, we chose for analysis a dataset of class information for each class 
+                      taught at the University of Washington (Seattle) from Autumn 2010 to Winter 2016.  Specifically, we were 
+                      most interested in the breakdown of the letter grading within each class. This data is anonymized and can 
+                      be manipulated to highlight features that are important to current UW students. Using this data and our 
+                      visualizations, the user can determine which classes have a higher average GPA when stratified by quarter.")
+                    
+                    
                     
            )
-
 )
-
-  
 
