@@ -9,9 +9,9 @@ For our final project in INFO 201, we chose for analysis a dataset of class info
 Check out the site [here](https://joshkeating.shinyapps.io/info-201-coursegrades/)
 
 ###### Line plot
-![alt text](https://github.com/joshkeating/info-201-coursegrades/resources/lineplot.png "Line plot")
+![alt text](https://github.com/joshkeating/info-201-coursegrades/blob/master/resources/lineplot.png "Line plot")
 
 
 ###### Dot plot
-![alt text](https://github.com/joshkeating/info-201-coursegrades/resources/dotplot.png "Dot plot")
+![alt text](https://github.com/joshkeating/info-201-coursegrades/blob/master/resources/dotplot.png "Dot plot")
 
